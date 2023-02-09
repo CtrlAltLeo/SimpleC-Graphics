@@ -10,6 +10,8 @@
 
 using namespace std;
 
+const char null = '~';
+
 const int SCREEN_X = 70;
 const int SCREEN_Y = 30;
 
@@ -34,6 +36,11 @@ void _draw(){
 
 void set_char(int x, int y, char c){
 	
+	if (c == null){
+		return;
+	}
+
+
 	screen[y][x] = c;
 
 }
@@ -94,8 +101,7 @@ void line(int x1, int y1, int x2, int y2, char c){
 
 
 void print(int x, int y, string text){
-
-		
+	
 	int i;
 	for (i = 0; i < text.length(); i++){
 	
@@ -116,6 +122,26 @@ void ascii_image(int x, int y, string path){
 
 	ifstream art;
 	art.open(path);
+	
+	string line;
+	
+	int Y = 0;
+
+	while(getline(art, line)){
+
+		for (int i = 0; i < line.length(); i++){
+			if (line[i] == ' '){
+				line[i] = null;
+			}
+
+		}
+
+
+		//displays the line	
+		print(x,y+Y,line);
+		Y += 1;
+	}
+
 
 }
 
@@ -124,8 +150,8 @@ int main(){
 	
 	
 	int x,y;
-	x = 20;
-	y = 10;
+	x = 0;
+	y = 0;
 
 	int ly = 10;
 
@@ -135,13 +161,17 @@ int main(){
 	
 		rect_fill(0,0,SCREEN_X,SCREEN_Y,'`');
 		
+		ascii_image(SCREEN_X/2,0,"test");
+
+		x += 1;
+		y += 1;
+
 		rect_fill(2,SCREEN_Y/2, SCREEN_X-2,SCREEN_Y-2,'%');
 
 		rect_fill(3,SCREEN_Y/2+1, SCREEN_X-3,SCREEN_Y-3,'.');
 
 		print(5, SCREEN_Y/2+3,"HEY! YOU'RE FINALLY AWAKE!");
-
-		_draw();	
+				_draw();	
 			
 		sleep(1);
 
