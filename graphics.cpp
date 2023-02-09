@@ -8,6 +8,13 @@
 #include <stdio.h>
 #include <unistd.h>
 
+//+++  TO DO +++
+//- add a way to prevent text drawn off the screen from bugging out
+//improve the line
+//add a circle tool?
+//add an empty rect
+
+
 using namespace std;
 
 const char null = '~';
@@ -161,7 +168,7 @@ int main(){
 	
 		rect_fill(0,0,SCREEN_X,SCREEN_Y,'`');
 		
-		ascii_image(SCREEN_X/2,0,"test");
+		ascii_image(5,-2,"test");
 
 		x += 1;
 		y += 1;
