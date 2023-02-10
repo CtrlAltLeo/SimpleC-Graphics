@@ -84,17 +84,12 @@ class display_screen{
 
 		//this doesn't work :]
 		void rect(int x1, int y1, int x2, int y2, char c, int w = 2){
+			
+			
+		
+			rect_fill(x1,y1,x2,y2,c);
+			rect_fill(x1+w,y1+w,x2-w,y2-w,' ');		
 
-			int x,y;
-
-			for (y = y1; y < y2; y++){
-				for (x = x1; x < x2; x++){
-					
-
-
-
-				}
-			}
 
 		}
 
@@ -129,8 +124,69 @@ class display_screen{
 
 
 		//prints in a box, i.e. dialouge or inventory
-		void bounds_print(){
+		void print_bounds(int x1, int y1, int x2, int y2, string text){
 
+			//create vector of words
+			vector<string> words;
+			
+			
+
+			int word_start = 0;
+
+			while(word_start < text.length()){
+				//sleep(1);	
+				string sub;
+				
+				for (int i = word_start; i < text.length()+1; i++){
+					if (text[i] == ' ' || i == text.length()){
+						
+						word_start = i+1;
+						break;
+					}
+
+					sub = sub + text[i];
+				}
+
+				
+				words.push_back(sub);
+					
+
+			}	
+
+
+			//combine words into strings less than x
+			
+			vector<string> complete_lines;
+			string holding_string;
+
+			for (auto i : words){	
+
+				int dist = x2 - x1;
+
+				if (holding_string.length() + i.length() > dist){
+					complete_lines.push_back(holding_string);
+					holding_string = "";
+				}	
+
+				holding_string = holding_string + i + " ";
+
+			}
+
+			if (holding_string != ""){
+				complete_lines.push_back(holding_string);
+			}
+
+
+			//print lines
+			int y = y1;
+			for (auto line: complete_lines){
+				print(x1,y, line);
+				y += 1;
+				
+			}	
+
+
+					
 		}
 
 		void ascii_image(int x, int y, string path){
@@ -143,15 +199,18 @@ class display_screen{
 			int Y = 0;
 
 			while(getline(art, line)){
-
+			
 				for (int i = 0; i < line.length(); i++){
+					
 					if (line[i] == ' '){
 						line[i] = null;
+					} else {
+						break;
 					}
 
-				}
+				}	
 
-
+			
 				//displays the line	
 				print(x,y+Y,line);
 				Y += 1;
@@ -170,27 +229,34 @@ int main(){
 	x = 0;
 	y = 0;
 
-	display_screen display;	
+	display_screen display;
 
 	while (true){
 
 		display.cls();
 
-		display.rect_fill(0,0, SCREEN_X, SCREEN_Y, '-');
+		display_screen display;	
 
-		display.ascii_image(1,1,"test");
+		display.ascii_image(0,0,"test");
 
-		display.rect_fill(2,SCREEN_Y/2, SCREEN_X - 2, SCREEN_Y-2, '&');
+		display.rect_fill(0,0,70,30,'#');
+		
+		display.print_bounds(3,3,10,3,"HEY YOU");	
+		
+		
 
-		display.rect_fill(3,SCREEN_Y/2+1, SCREEN_X - 3, SCREEN_Y-3, '.');
+		for (int i = 0; i < SCREEN_X; i++){
+			
+		display.set_char(i,5,'*');
 
+		}
 
-		display.print(4,SCREEN_Y/2+2, "Hey you, you're finally awake. You were trying to cross the border..");
 
 		display.draw();
 			
 		sleep(1);
 
+		x += 1;
 		
 
 	}
