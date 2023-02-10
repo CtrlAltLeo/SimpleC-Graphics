@@ -229,6 +229,8 @@ int main(){
 	x = 0;
 	y = 0;
 
+	int t = 1;
+
 	display_screen display;
 
 	while (true){
@@ -243,14 +245,18 @@ int main(){
 		
 		display.print_bounds(3,3,10,3,"HEY YOU");	
 		
-		
+			
 
 		for (int i = 0; i < SCREEN_X; i++){
 			
-		display.set_char(i,5,'*');
+			float ang = (t*3.14)/180;
+
+			display.set_char(i*cos(ang), i*sin(ang), 'c');
+
 
 		}
 
+		t += 1;
 
 		display.draw();
 			
