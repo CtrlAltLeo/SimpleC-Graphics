@@ -244,9 +244,15 @@ int main(){
 		display.rect_fill(0,0,70,30,'#');
 		
 		display.print_bounds(3,3,10,3,"HEY YOU");	
-		
-			
 
+			
+		
+		display.rect(2,2,68,28, 'c');
+
+
+
+			
+// Save this lmao
 		for (int i = 0; i < SCREEN_X; i++){
 			
 			float ang = (t*3.14)/180;
@@ -257,6 +263,18 @@ int main(){
 		}
 
 		t += 1;
+
+		display.ascii_image(3,3,"test");
+
+		
+
+		display.rect_fill(45, 5, 60,20, '$');
+
+		display.rect_fill(46, 6, 59,19, '.');
+		
+		display.print_bounds(47,7,58,18,"Hello there! I am Onion Turt! It's all about Cheese!");
+
+
 
 		display.draw();
 			
