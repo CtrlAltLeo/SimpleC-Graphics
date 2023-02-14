@@ -1,4 +1,3 @@
-
 #define graphics
 
 #include <iostream>
@@ -7,22 +6,23 @@
 #include <vector>
 #include <fstream>
 
-//testing
-//+++  TO DO +++
-//add an empty rect
-
-
 using namespace std;
 
 
+/*
 const int SCREEN_X = 70;
 const int SCREEN_Y = 30;
+*/
+
 
 class display_screen{
 	
 
 	private:	
 		
+		int SCREEN_X = 70;
+		int SCREEN_Y = 30;
+
 		const char null = '~';
 		char screen[SCREEN_Y][SCREEN_X] = {};
 	
@@ -43,14 +43,6 @@ class display_screen{
 			screen_init();
 			
 		}
-
-		display_screen(int X, int Y){
-			
-		
-
-		}
-
-
 
 
 		void draw(){
