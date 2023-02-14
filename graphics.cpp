@@ -9,10 +9,10 @@
 using namespace std;
 
 
-/*
+
 const int SCREEN_X = 70;
 const int SCREEN_Y = 30;
-*/
+
 
 
 class display_screen{
@@ -20,9 +20,6 @@ class display_screen{
 
 	private:	
 		
-		int SCREEN_X = 70;
-		int SCREEN_Y = 30;
-
 		const char null = '~';
 		char screen[SCREEN_Y][SCREEN_X] = {};
 	
@@ -80,7 +77,6 @@ class display_screen{
 		void cls(){
 			cout << "\033[2J\033[1;1H";
 			
-			//Maybe it clears the draw array too?
 
 
 		}
@@ -111,8 +107,6 @@ class display_screen{
 			
 			float ang = atan((y2-y1)/(x2-x1));
 			
-			cout << ang << endl;
-
 			for (int i = x1; i < x2; i++){
 				
 			 	int x = floor(i*cos(ang));
