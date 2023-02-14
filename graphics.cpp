@@ -1,3 +1,6 @@
+
+#define graphics
+
 #include <iostream>
 #include <cmath>
 #include <string>
@@ -5,13 +8,7 @@
 #include <fstream>
 
 //testing
-#include <stdio.h>
-#include <unistd.h>
-
 //+++  TO DO +++
-//- add a way to prevent text drawn off the screen from bugging out
-//improve the line
-//add a circle tool?
 //add an empty rect
 
 
@@ -260,34 +257,4 @@ class display_screen{
 		
 };
 
-
-
-int main(){
-	
-	
-	int x,y;
-	x = 0;
-	y = 0;
-
-	int t = 1;
-
-	display_screen display;
-	
-	while (true){
-
-	display.cls();
-
-	display.circ_fill(30,15,x,'.');
-
-	x += 1;
-	
-	display.draw();
-
-	sleep(1);
-
-	}
-
-	return 0;
-
-}
-
+#endif
