@@ -32,6 +32,17 @@ class display_screen{
 		char screen[SCREEN_Y][SCREEN_X] = {};
 	
 	public:
+		
+		display_screen(){
+			for (int y = 0; y < SCREEN_Y; y++){
+				for (int x = 0; x < SCREEN_X; x++){
+					
+					screen[y][x] = ' ';
+
+				}
+			}
+
+		}
 
 		void draw(){
 				int x,y;
@@ -41,7 +52,9 @@ class display_screen{
 
 				for (x = 0; x < SCREEN_X; x++){
 					
-						h_line = h_line + screen[y][x];		
+						h_line = h_line + screen[y][x];
+
+								
 
 				}
 
@@ -54,7 +67,10 @@ class display_screen{
 			if (c == null){
 				return;
 			}
-
+			
+			if (x < 0 || y < 0 || x > SCREEN_X || y > SCREEN_Y){
+				return;
+			}
 
 			screen[y][x] = c;
 
@@ -84,26 +100,25 @@ class display_screen{
 
 		//this doesn't work :]
 		void rect(int x1, int y1, int x2, int y2, char c, int w = 2){
-			
-			
-		
 			rect_fill(x1,y1,x2,y2,c);
 			rect_fill(x1+w,y1+w,x2-w,y2-w,' ');		
-
-
 		}
 
-		//Neither does this. Angle is wrong for some reason.
-		void line(int x1, int y1, int x2, int y2, char c){
+		
+		
+		void line(double x1, double y1,double x2, double y2, char c){
+			
+			float ang = atan((y2-y1)/(x2-x1));
+			
+			cout << ang << endl;
 
-			float m = atan((y2-y1)/(x2-x1));
+			for (int i = x1; i < x2; i++){
 				
-			int x,y;
-			for (x = x1; x < x2; x++){
-				
-				set_char( floor(x*cos(m)),floor( y * sin(m)), c);
+			 	int x = floor(i*cos(ang));
+				int y = floor(i*sin(ang));
 
-			}	
+				set_char(x,y,c);			
+			}
 
 
 
@@ -219,8 +234,33 @@ class display_screen{
 
 		}
 		
+
+		void circ(int x, int y, int r, char c){
+			
+			for (int i = 0; i < 360; i++){
+				
+				double deg = (i*3.14)/180;
+				
+				set_char(floor(r*1.5*cos(deg))+x, floor(r*sin(deg))+y, c);
+				
+			}
+
+		}
+
+		void circ_fill(int x, int y, int r, char c){
+			
+
+			for (int i = r; i > 0; --i){
+				
+				circ(x,y,i,c);
+
+			}
+
+		}
 		
 };
+
+
 
 int main(){
 	
@@ -232,56 +272,18 @@ int main(){
 	int t = 1;
 
 	display_screen display;
-
+	
 	while (true){
 
-		display.cls();
+	display.cls();
 
-		display_screen display;	
+	display.circ_fill(30,15,x,'.');
 
-		display.ascii_image(0,0,"test");
+	x += 1;
+	
+	display.draw();
 
-		display.rect_fill(0,0,70,30,'#');
-		
-		display.print_bounds(3,3,10,3,"HEY YOU");	
-
-			
-		
-		display.rect(2,2,68,28, 'c');
-
-
-
-			
-// Save this lmao
-		for (int i = 0; i < SCREEN_X; i++){
-			
-			float ang = (t*3.14)/180;
-
-			display.set_char(i*cos(ang), i*sin(ang), 'c');
-
-
-		}
-
-		t += 1;
-
-		display.ascii_image(3,3,"test");
-
-		
-
-		display.rect_fill(45, 5, 60,20, '$');
-
-		display.rect_fill(46, 6, 59,19, '.');
-		
-		display.print_bounds(47,7,58,18,"Hello there! I am Onion Turt! It's all about Cheese!");
-
-
-
-		display.draw();
-			
-		sleep(1);
-
-		x += 1;
-		
+	sleep(1);
 
 	}
 
