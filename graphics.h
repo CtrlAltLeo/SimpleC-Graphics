@@ -5,7 +5,7 @@
 #include <string>
 #include <vector>
 #include <fstream>
-
+#include <unistd.h>
 using namespace std;
 
 
@@ -75,7 +75,7 @@ class display_screen{
 		}
 
 		void cls(){
-			cout << "\033[2J\033[1;1H";
+			system("clear");
 			
 
 

@@ -4,6 +4,8 @@
 
 int main(){
 	
+	while (true){
+
 	display_screen display;
 	
 	display.cls();
@@ -13,6 +15,9 @@ int main(){
 	display.ascii_image(10,10, "test");
 
 	display.draw();
+	
+	system("sleep .2");
+	}
 
 	return 0;
 
